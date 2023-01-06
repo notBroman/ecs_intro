@@ -8,6 +8,14 @@ void Entity::destroy(){
     m_alive = false;
 }
 
-const std::string& Entity::tag(){
+const std::string& Entity::tag() const {
     return m_tag;
+}
+
+bool Entity::isAlive() const {
+    return m_alive;
+}
+
+const size_t Entity::id() const {
+    return m_id;
 }

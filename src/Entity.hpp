@@ -27,6 +27,8 @@ public:
 
     void destroy();
 
-    const std::string& tag();
+    const std::string& tag() const;
+    bool isAlive() const;
+    const size_t id() const;
 
 };
