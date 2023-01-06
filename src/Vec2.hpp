@@ -1,5 +1,6 @@
 #pragma once
 #include <cmath>
+#include <iostream>
 
 class Vec2 {
     public:
@@ -19,7 +20,17 @@ class Vec2 {
 
         // operators
         bool operator == (const Vec2& rhs) const;
+        bool operator != (const Vec2& rhs) const;
+
         Vec2 operator + (const Vec2& rhs) const;
+        Vec2 operator - (const Vec2& rhs) const;
         Vec2 operator * (const Vec2& rhs) const;
+        Vec2 operator / (const Vec2& rhs) const;
+
         void operator += (const Vec2& rhs);
+        void operator -= (const Vec2& rhs);
+        void operator *= (const float rhs);
+        void operator /= (const float rhs);
+
+        void operator << () const;
 };

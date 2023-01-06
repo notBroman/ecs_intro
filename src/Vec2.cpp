@@ -34,18 +34,51 @@ Vec2& Vec2::rotate(float deg){
 
 // overloads
 bool Vec2::operator== (const Vec2& rhs) const {
-    return (x == rhs.x && y == rhs.y) ? true : false;
+    return (x == rhs.x && y == rhs.y);
+}
+
+bool Vec2::operator!= (const Vec2& rhs) const {
+    return (x != rhs.x || y != rhs.y);
 }
 
 Vec2 Vec2::operator+ (const Vec2& rhs) const {
     return Vec2(x + rhs.x, y + rhs.y);
 }
 
+Vec2 Vec2::operator- (const Vec2& rhs) const {
+    return Vec2(x - rhs.x, y - rhs.y);
+}
+
 Vec2 Vec2::operator* (const Vec2& rhs) const {
+    //TO DO
+    return Vec2(x * rhs.x, y * rhs.y);
+}
+
+Vec2 Vec2::operator/ (const Vec2& rhs) const {
+    // TO DO
     return *this;
 }
 
 void Vec2::operator+= (const Vec2& rhs){
     x += rhs.x;
     y += rhs.y;
+}
+
+
+void Vec2::operator-= (const Vec2& rhs){
+    x -= rhs.x;
+    y -= rhs.y;
+}
+
+void Vec2::operator*= (const Vec2& rhs){
+    x *= rhs.x;
+    y *= rhs.y;
+}
+
+void Vec2::operator/= (const Vec2& rhs){
+    //TO DO
+}
+
+void Vec2::operator<< (const Vec2& rhs){
+    std::cout << "x: " << x << ",y: " << y << std::endl;
 }
