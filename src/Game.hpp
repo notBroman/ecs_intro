@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <fstream>
 
 #include "Entity.hpp"
 #include "EntityManager.hpp"
@@ -35,6 +36,7 @@ class Game{
     BulletConfig m_bulletConf;  // save config for bullets
 
     int m_currentFrame = 0;     // current frame
+    int m_lastEnemySpawn = 0;
     bool m_paused = false;      // is game paused
     bool m_running = true;      // is game running
 
