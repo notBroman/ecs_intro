@@ -79,6 +79,3 @@ void Vec2::operator/= (const Vec2& rhs){
     //TO DO
 }
 
-void Vec2::operator<< (const Vec2& rhs){
-    std::cout << "x: " << x << ",y: " << y << std::endl;
-}

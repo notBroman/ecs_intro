@@ -29,8 +29,7 @@ class Vec2 {
 
         void operator += (const Vec2& rhs);
         void operator -= (const Vec2& rhs);
-        void operator *= (const float rhs);
-        void operator /= (const float rhs);
+        void operator *= (const Vec2& rhs);
+        void operator /= (const Vec2& rhs);
 
-        void operator << () const;
 };
