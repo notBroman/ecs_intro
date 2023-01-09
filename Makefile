@@ -6,7 +6,7 @@ SFML_DIR := /opt/homebrew/Cellar/sfml/2.5.1_2/
 #Compiler & Linker flags
 CXX_FLAGS := -O3 -std=c++17
 INCLUDES := -I./src -I$(SFML_DIR)/include
-LDFLAGS := -O3 -lsfml-graphic -lsfml-window -lsfml-system -lsfml-audio -L$(SFML_DIR)/lib
+LDFLAGS := -O3 -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -L$(SFML_DIR)/lib
 
 #source files
 SRC_FILES := $(wildcard src/*.cpp)
