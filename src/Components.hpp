@@ -9,7 +9,7 @@
  *
  */
 class CTransform{
-pubilc:
+public:
     Vec2 pos = {0.0, 0.0};
     Vec2 velocity = {0.0, 0.0};
     float angle = 0;
@@ -46,7 +46,7 @@ class CHealth{
 public:
     float health = 100;
 
-    CHealth(float h) : health(health) {
+    CHealth(float h) : health(h) {
     }
 };
 
