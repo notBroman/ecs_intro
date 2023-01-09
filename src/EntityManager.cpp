@@ -1,5 +1,7 @@
 #include "EntityManager.hpp"
 
+EntityManager::EntityManager() {};
+
 void EntityManager::update() {
     // calle at the beginning of each frame by the game engine
     // entities add will now be available to use this frame
