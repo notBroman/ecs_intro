@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <fstream>
+#include <algorithm>
 
 #include "Entity.hpp"
 #include "EntityManager.hpp"

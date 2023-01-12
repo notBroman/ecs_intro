@@ -43,7 +43,7 @@ void Game::spawnPlayer(){
     auto entity = m_entities.addEntity("player");
     // attach components
     entity->cTransform = std::make_shared<CTransform>(Vec2(200.0f, 200.0f),
-            Vec2(2.0f, 2.0f) ,0.0f);
+            Vec2(4.0f, 4.0f) ,0.0f);
     entity->cShape = std::make_shared<CShape>(32.0f, 8 , sf::Color(10,10,10),
             sf::Color(255,0,0), 4.0f);
     entity->cInput = std::make_shared<CInput>();
@@ -128,17 +128,32 @@ void Game::sUserInput(){
 void Game::sMovement(){
     // TODO
     auto p = m_entities.getEntities("player")[0];
+    Vec2 min_bounds = {p->cShape->circle.getRadius(), p->cShape->circle.getRadius()};
+    Vec2 max_bounds = {(float)m_window.getSize().x, (float)m_window.getSize().y};
+    max_bounds -= min_bounds;
     if(p->cInput->up){
         p->cTransform->pos.y -= p->cTransform->velocity.y;
+        if(p->cTransform->pos.y < min_bounds.y){
+            p->cTransform->pos.y = min_bounds.y;
+        }
     }
     if(p->cInput->left){
         p->cTransform->pos.x -= p->cTransform->velocity.x;
+        if(p->cTransform->pos.x < min_bounds.x){
+            p->cTransform->pos.x = min_bounds.x;
+        }
     }
     if(p->cInput->down){
         p->cTransform->pos.y += p->cTransform->velocity.y;
+        if(p->cTransform->pos.y > max_bounds.y){
+            p->cTransform->pos.y = max_bounds.y;
+        }
     }
     if(p->cInput->right){
         p->cTransform->pos.x += p->cTransform->velocity.x;
+        if(p->cTransform->pos.x > max_bounds.x){
+            p->cTransform->pos.x = max_bounds.x;
+        }
     }
 }
 
