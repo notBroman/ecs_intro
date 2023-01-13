@@ -69,13 +69,16 @@ void Game::sEnemySpawner(){
 }
 
 void Game::spawnBullet(std::shared_ptr<Entity> entity, const Vec2& mousePos){
-    auto e = m_entities.addEntity("bullet");
-    // spawn from player
+    if(m_currentFrame - m_lastShot >= 15 || m_lastShot == 0){
 
-    e->cTransform = std::make_shared<CTransform>(entity->cTransform->pos,
-            Vec2(1.0f, 0.0f) ,0.0f);
-    e->cShape = std::make_shared<CShape>(8.0f, 4, sf::Color(10,10,10),
+        auto e = m_entities.addEntity("bullet");
+        // spawn from player
+        e->cTransform = std::make_shared<CTransform>(entity->cTransform->pos,
+            Vec2(5.0f, 0.0f) ,0.0f);
+        e->cShape = std::make_shared<CShape>(8.0f, 4, sf::Color(10,10,10),
             sf::Color(255,255,255), 4.0f);
+        m_lastShot = m_currentFrame;
+    }
 }
 
 void Game::sUserInput(){
@@ -103,6 +106,10 @@ void Game::sUserInput(){
 
                 case sf::Keyboard::D:
                     p->cInput->right = true;
+                    break;
+
+                case sf::Keyboard::Space:
+                    spawnBullet(p, Vec2(0,0));
                     break;
 
                 default:
@@ -161,8 +168,8 @@ void Game::sMovement(){
     }
     if(p->cInput->right){
         p->cTransform->pos.x += p->cTransform->velocity.x;
-        if(p->cTransform->pos.x > max_bounds.x){
-            p->cTransform->pos.x = max_bounds.x;
+        if(p->cTransform->pos.x > max_bounds.x/6){
+            p->cTransform->pos.x = max_bounds.x/6;
         }
     }
 
@@ -174,6 +181,16 @@ void Game::sMovement(){
 
         if(e->cTransform->pos.y < e->cShape->circle.getRadius()|| e->cTransform->pos.y > (float)m_window.getSize().y - e->cShape->circle.getRadius()){
             e->cTransform->velocity.y *= -1;
+        }
+    }
+    for (auto e : m_entities.getEntities("bullet")){
+        e->cTransform->pos += e->cTransform->velocity;
+        if(e->cTransform->pos.x < e->cShape->circle.getRadius() || e->cTransform->pos.x > (float)m_window.getSize().x - e->cShape->circle.getRadius()){
+            e->destroy();
+        }
+
+        if(e->cTransform->pos.y < e->cShape->circle.getRadius()|| e->cTransform->pos.y > (float)m_window.getSize().y - e->cShape->circle.getRadius()){
+            e->destroy();
         }
     }
 }

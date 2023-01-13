@@ -2,7 +2,6 @@
 
 #include <SFML/Graphics.hpp>
 #include <fstream>
-#include <algorithm>
 
 #include "Entity.hpp"
 #include "EntityManager.hpp"
@@ -38,6 +37,7 @@ class Game{
 
     int m_currentFrame = 0;     // current frame
     int m_lastEnemySpawn = 0;
+    int m_lastShot = 0;
     bool m_paused = false;      // is game paused
     bool m_running = true;      // is game running
 
