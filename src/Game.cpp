@@ -58,7 +58,7 @@ void Game::spawnEnemy(){
     // attach components
     entity->cTransform = std::make_shared<CTransform>(Vec2(ex, ey),
             Vec2(1.0f, 1.0f) ,0.0f);
-    entity->cShape = std::make_shared<CShape>(32.0f, 3, sf::Color(10,10,10),
+    entity->cShape = std::make_shared<CShape>(16.0f, 3, sf::Color(10,10,10),
             sf::Color(0,0,255), 4.0f);
 
     m_lastEnemySpawn = m_currentFrame;
@@ -66,6 +66,16 @@ void Game::spawnEnemy(){
 
 void Game::sEnemySpawner(){
     if(m_currentFrame == 0){ spawnEnemy(); };
+}
+
+void Game::spawnBullet(std::shared_ptr<Entity> entity, const Vec2& mousePos){
+    auto e = m_entities.addEntity("bullet");
+    // spawn from player
+
+    e->cTransform = std::make_shared<CTransform>(entity->cTransform->pos,
+            Vec2(1.0f, 0.0f) ,0.0f);
+    e->cShape = std::make_shared<CShape>(8.0f, 4, sf::Color(10,10,10),
+            sf::Color(255,255,255), 4.0f);
 }
 
 void Game::sUserInput(){
@@ -153,6 +163,17 @@ void Game::sMovement(){
         p->cTransform->pos.x += p->cTransform->velocity.x;
         if(p->cTransform->pos.x > max_bounds.x){
             p->cTransform->pos.x = max_bounds.x;
+        }
+    }
+
+    for (auto e : m_entities.getEntities("enemy")){
+        e->cTransform->pos += e->cTransform->velocity;
+        if(e->cTransform->pos.x < e->cShape->circle.getRadius() || e->cTransform->pos.x > (float)m_window.getSize().x - e->cShape->circle.getRadius()){
+            e->cTransform->velocity.x *= -1;
+        }
+
+        if(e->cTransform->pos.y < e->cShape->circle.getRadius()|| e->cTransform->pos.y > (float)m_window.getSize().y - e->cShape->circle.getRadius()){
+            e->cTransform->velocity.y *= -1;
         }
     }
 }
